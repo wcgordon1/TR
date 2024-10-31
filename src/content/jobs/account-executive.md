@@ -23,7 +23,7 @@ baseSalary:
   maxValue: 75000
   unitText: "YEAR"
 experienceRequirements: "5+ years"
-occupationalCategory: "Financial Operations"
+occupationalCategory: "Dickboy"
 identifier:
   name: "Spazio Bianco"
   value: "AR-MGR-2024"

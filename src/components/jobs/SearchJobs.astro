@@ -3,99 +3,81 @@
 ---
 
 <div class="lg:-mt-24 mx-auto md:px-32 py-6 max-w-7xl">
-  <div
-    class="mx-auto rounded-3xl p-4 lg:p-8 mt-4 bg-white/20 backdrop-blur-xl shadow-2xl shadow-purple-500/10">
-    <div class="grid grid-cols-1">
-      <div class="flex justify-start items-center relative">
-        <input
-          id="jobSearch"
-          class="leading-none text-left block w-full rounded-full border-0 py-3.5 pl-4 pr-10 text-slate-500 ring-1 ring-inset ring-slate-200 focus:ring-2 focus:ring-purple-500 sm:text-sm sm:leading-6 duration-200 outline-none"
-          type="text"
-          placeholder="Search jobs or salary (e.g. 60000)..."
-          aria-label="Search jobs"
-          aria-describedby="searchIcon"
+  <div class="mx-auto rounded-3xl p-4 lg:p-8 mt-4 bg-white/20 backdrop-blur-xl shadow-2xl shadow-purple-500/10">
+    <div class="flex-grow relative">
+      <input
+        id="searchInput"
+        class="leading-none text-left block w-full rounded-2xl border-0 py-3.5 pl-4 pr-24 text-slate-500 ring-1 ring-inset ring-slate-200 focus:ring-2 focus:ring-blue-600 sm:text-sm sm:leading-6 duration-200 outline-none"
+        type="text"
+        placeholder="Search jobs..."
+        aria-label="Search jobs"
+      />
+      <button
+        id="clearButton"
+        class="absolute right-12 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-sm font-medium hidden"
+        aria-label="Clear search">
+        Clear
+      </button>
+      <svg
+        class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         />
-        <svg
-          id="searchIcon"
-          class="absolute right-4 z-10"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Search Icon">
-          <title>Search Icon</title>
-          <path
-            d="M10 17C13.866 17 17 13.866 17 10C17 6.13401 13.866 3 10 3C6.13401 3 3 6.13401 3 10C3 13.866 6.13401 17 10 17Z"
-            stroke="currentColor"
-            class="text-slate-400"
-            stroke-width="1.66667"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-          <path
-            d="M21 21L15 15"
-            stroke="currentColor"
-            class="text-slate-400"
-            stroke-width="1.66667"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
-      </div>
+      </svg>
     </div>
   </div>
 </div>
 
 <script>
-  function initializeSearch() {
-    const searchInput = document.getElementById('jobSearch') as HTMLInputElement;
-    if (!searchInput) return;
-
-    const jobItems = document.querySelectorAll('[data-searchable]');
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+    const clearButton = document.getElementById('clearButton');
     
-    function handleSearch() {
-      const searchTerm = searchInput.value.toLowerCase();
-      const searchNumber = parseInt(searchTerm.replace(/[^0-9]/g, ''));
+    function filterJobs() {
+      const jobItems = document.querySelectorAll('.job-item');
+      const searchTerm = searchInput?.value.toLowerCase() || '';
+
+      // Show/hide clear button based on search length
+      if (clearButton) {
+        clearButton.classList.toggle('hidden', searchTerm.length < 2);
+      }
 
       jobItems.forEach(item => {
         if (!(item instanceof HTMLElement)) return;
+        
+        const jobData = {
+          position: item.dataset.position,
+          location: item.dataset.location,
+          team: item.dataset.team,
+          description: item.dataset.description,
+          category: item.dataset.category
+        };
 
-        // Text content to search through
-        const searchableContent = [
-          item.querySelector('[data-position]'),
-          item.querySelector('[data-company]'),
-          item.querySelector('[data-location]'),
-          item.querySelector('[data-type]')
-        ].map(el => el?.textContent?.toLowerCase() || '').join(' ');
+        const matchesSearch = !searchTerm || Object.values(jobData).some(value => 
+          value && value.toLowerCase().includes(searchTerm)
+        );
 
-        // Salary range check
-        const minSalary = parseInt(item.dataset.minSalary || '0');
-        const maxSalary = parseInt(item.dataset.maxSalary || '0');
-
-        // Determine if it's a salary search
-        const isSalarySearch = !isNaN(searchNumber) && searchNumber > 0;
-
-        // Check for matches
-        const textMatches = searchableContent.includes(searchTerm);
-        const salaryMatches = isSalarySearch ? 
-          (searchNumber >= minSalary && searchNumber <= maxSalary) : 
-          true;
-
-        // Show/hide based on matches
-        item.style.display = (textMatches || salaryMatches) ? '' : 'none';
+        item.style.display = matchesSearch ? '' : 'none';
       });
     }
 
-    // Debounce the search to improve performance
-    let timeout: NodeJS.Timeout;
-    searchInput.addEventListener('input', () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(handleSearch, 300);
-    });
-  }
+    function clearSearch() {
+      if (searchInput) {
+        searchInput.value = '';
+        filterJobs();
+      }
+    }
 
-  // Initialize search when the DOM is ready
-  document.addEventListener('DOMContentLoaded', initializeSearch);
+    searchInput?.addEventListener('input', filterJobs);
+    clearButton?.addEventListener('click', clearSearch);
+  });
 </script>

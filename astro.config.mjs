@@ -17,6 +17,6 @@ export default defineConfig({
     skipInline: false,
     drafts: true
   },
-  site: 'https://lexingtonthemes.com',
+  site: 'https://tustinrecruiting.com',
   integrations: [tailwind(), sitemap(), mdx(), devtoolBreakpoints()]
 });

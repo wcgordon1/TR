@@ -1,6 +1,6 @@
 ---
 position: "Operations Manager"
-description: "Spazio Bianco is seeking a talented Accounts Receivable Manager to join our innovative team. In this role, you will be responsible for managing and optimizing our monetization operations, ensuring seamless financial processes, and leading initiatives to improve revenue collection efficiency."
+description: "Spazio Bianco is seeking SHITTTTTTTT a talented Accounts Receivable Manager to join our innovative team. In this role, you will be responsible for managing and optimizing our monetization operations, ensuring seamless financial processes, and leading initiatives to improve revenue collection efficiency."
 location: "Madrid, Spain"
 team: "Controller"
 datePosted: "2024-03-20"
@@ -23,7 +23,7 @@ baseSalary:
   maxValue: 175000
   unitText: "YEAR"
 experienceRequirements: "5+ years"
-occupationalCategory: "Financial Operations"
+occupationalCategory: "cummmm"
 identifier:
   name: "Spazio Bianco"
   value: "AR-MGR-2024"

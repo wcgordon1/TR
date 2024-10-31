@@ -1,9 +1,50 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 const { frontmatter } = Astro.props;
+
+// Create JSON-LD schema
+const jobSchema = {
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": frontmatter.position,
+  "description": frontmatter.description,
+  "identifier": {
+    "@type": "PropertyValue",
+    ...frontmatter.identifier
+  },
+  "datePosted": frontmatter.datePosted,
+  "validThrough": frontmatter.validThrough,
+  "employmentType": frontmatter.employmentType,
+  "hiringOrganization": {
+    "@type": "Organization",
+    ...frontmatter.hiringOrganization
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      ...frontmatter.jobLocation
+    }
+  },
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": frontmatter.baseSalary.currency,
+    "value": {
+      "@type": "QuantitativeValue",
+      "minValue": frontmatter.baseSalary.minValue,
+      "maxValue": frontmatter.baseSalary.maxValue,
+      "value": frontmatter.baseSalary.value,
+      "unitText": frontmatter.baseSalary.unitText
+    }
+  },
+  "experienceRequirements": frontmatter.experienceRequirements,
+  "occupationalCategory": frontmatter.occupationalCategory
+};
 ---
 
 <BaseLayout>
+  <script type="application/ld+json" set:html={JSON.stringify(jobSchema)} />
+  
   <section>
     <div
       class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 lg:flex py-24">
@@ -16,11 +57,6 @@ const { frontmatter } = Astro.props;
               <div>
                 <h3 class="text-lg text-purple-900">Office location</h3>
                 <div class="flex items-center gap-2 mt-4">
-                  <img
-                    class=""
-                    src={frontmatter.flag.url}
-                    alt={frontmatter.flag.alt}
-                  />
                   <p class="text-slate-500">
                     {frontmatter.location}
                   </p>

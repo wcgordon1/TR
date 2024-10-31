@@ -8,7 +8,7 @@ const integrations = defineCollection({
     details: z.array(z.object({
       title: z.string(),
       value: z.string(),
-      url: z.optional(z.string()),
+      url: z.string().optional(),
     })),
     logo: z.object({
       url: z.string(),
@@ -33,9 +33,9 @@ const customers = defineCollection({
       title: z.string(),
       content: z.string(),
     })),
-results: z.array(z.string()),
+    results: z.array(z.string()),
     about: z.string(),
-    details: z.record(z.string()),
+    details: z.object({}).passthrough(),
     logo: z.object({
       url: z.string(),
       alt: z.string(),
@@ -48,16 +48,40 @@ const infopages = defineCollection({
     pubDate: z.date().optional(),
   }),
 });
-const jobs = defineCollection({
+const jobsCollection = defineCollection({
   schema: z.object({
     position: z.string(),
+    description: z.string(),
     location: z.string(),
     team: z.string(),
-    flag: z.object({
-      url: z.string(),
-      alt: z.string(),
+    datePosted: z.string(),
+    validThrough: z.string(),
+    employmentType: z.string(),
+    hiringOrganization: z.object({
+      name: z.string(),
+      sameAs: z.string(),
+      logo: z.string(),
     }),
-
+    jobLocation: z.object({
+      streetAddress: z.string(),
+      addressLocality: z.string(),
+      addressRegion: z.string(),
+      postalCode: z.string(),
+      addressCountry: z.string(),
+    }),
+    baseSalary: z.object({
+      currency: z.string(),
+      value: z.number(),
+      minValue: z.number(),
+      maxValue: z.number(),
+      unitText: z.string(),
+    }),
+    experienceRequirements: z.string(),
+    occupationalCategory: z.string(),
+    identifier: z.object({
+      name: z.string(),
+      value: z.string(),
+    }),
   }),
 });
 const postsCollection = defineCollection({
@@ -79,6 +103,6 @@ export const collections = {
   helpcenter: helpcenter,
   customers: customers,
   infopages: infopages,
-  jobs: jobs,
+  jobs: jobsCollection,
   posts: postsCollection,
 };

@@ -37,7 +37,7 @@ function formatSalary(baseSalary) {
     <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24">
       <SearchJobs />
       <div class="mt-12 lg:flex lg:gap-x-16">
-        <div class="lg:w-2/3">
+        <div class="lg:w-3/4">
           <ul role="list" class="divide-y divide-slate-100">
             {
               allPosts.map((post) => (
@@ -57,19 +57,12 @@ function formatSalary(baseSalary) {
             }
           </ul>
         </div>
-        <div class="lg:w-1/3">
+        <div class="lg:w-1/4">
           <div class="lg:sticky lg:top-8">
-            <div class="bg-slate-50 rounded-lg divide-y space-y-3 p-4 lg:p-8">
+            <div class="bg-slate-50 rounded-3xl divide-y space-y-3 p-4 lg:p-8">
               <div>
                 <h3 class="text-lg font-medium text-purple-900">Quick Links</h3>
-                <div class="mt-4 space-y-2">
-                  <a
-                    href="/jobs/job-application"
-                    class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-full"
-                  >
-                    Apply Now
-                  </a>
-                </div>
+            
               </div>
               <div class="pt-6">
                 <h3 class="text-lg font-medium text-purple-900">Resources</h3>
@@ -84,6 +77,14 @@ function formatSalary(baseSalary) {
                     <a href="#" class="text-slate-500 hover:text-blue-600">Benefits</a>
                   </li>
                 </ul>
+              </div>
+              <div class="mt-4 space-y-2">
+                <a
+                  href="/jobs/job-application"
+                  class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-full"
+                >
+                  Apply Now
+                </a>
               </div>
             </div>
           </div>

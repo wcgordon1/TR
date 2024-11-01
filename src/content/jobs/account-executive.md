@@ -2,7 +2,7 @@
 position: "Account Executive"
 description: "Spazio Bianco is seeking a talented Accounts Receivable Manager to join our innovative team. In this role, you will be responsible for managing and optimizing our monetization operations, ensuring seamless financial processes, and leading initiatives to improve revenue collection efficiency."
 location: "Madrid, Spain"
-team: "Controller"
+team: "Sales"
 datePosted: "2024-03-20"
 validThrough: "2024-06-20T00:00"
 employmentType: "FULL_TIME"
@@ -23,7 +23,7 @@ baseSalary:
   maxValue: 75000
   unitText: "YEAR"
 experienceRequirements: "5+ years"
-occupationalCategory: "Dickboy"
+occupationalCategory: "Finance"
 identifier:
   name: "Spazio Bianco"
   value: "AR-MGR-2024"

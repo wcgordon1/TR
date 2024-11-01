@@ -16,6 +16,7 @@ export async function POST({ request }) {
     const email = formData.get('email');
     const message = formData.get('message');
     const file = formData.get('file');
+    const phone = formData.get('phone');
 
     const fileArrayBuffer = await file.arrayBuffer();
     const fileContent = Buffer.from(fileArrayBuffer).toString('base64');
@@ -24,7 +25,7 @@ export async function POST({ request }) {
       from: 'hey@tustinjobalert.com',
       to: ['will@tustinrecruiting.com', 'john@tustinrecruiting.com'],
       subject: `New Contact Form Submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}\nPhone: ${phone}`,
       attachments: [
         {
           filename: file.name,

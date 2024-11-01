@@ -1,0 +1,51 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <section>
+    <h1>Contact Us</h1>
+    <form id="contactForm" enctype="multipart/form-data">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <label for="file">Attachment:</label>
+      <input type="file" id="file" name="file" required />
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <script>
+      const form = document.getElementById('contactForm') as HTMLFormElement;
+      
+      form?.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            body: formData,
+          });
+
+          const result = await response.json();
+          if (result.success) {
+            alert('Message sent successfully!');
+            this.reset();
+          } else {
+            alert(`Error: ${result.error}`);
+          }
+        } catch (error) {
+          alert('There was an error sending the message. Please try again later.');
+        }
+      });
+    </script>
+  </section>
+</BaseLayout>

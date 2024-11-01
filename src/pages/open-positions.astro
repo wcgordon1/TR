@@ -34,16 +34,17 @@ function formatSalary(baseSalary) {
       </div>
     </header>
 
+    <!-- This is where search filter spacing is adjusted -->
     <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24">
-      <SearchJobs />
-      
-      <div class="mt-12 lg:flex lg:gap-x-16">
-        <!-- Filters sidebar -->
-        <div class="lg:w-1/4">
+      <div class="lg:-mt-24 -mt-11">
+        <SearchJobs />
+      </div>
+      <!-- This is where search filter spacing is adjusted  -mt-11-->
+      <div class="mt-4 lg:mt-12 lg:flex lg:gap-x-16">
+        <div class="lg:w-1/4 -mt-11 lg:mt-0">
           <JobFilters />
         </div>
         
-        <!-- Job listings -->
         <div class="lg:w-2/4 mt-8 lg:mt-0">
           <ul role="list" class="job-list divide-y divide-slate-100">
             {
@@ -65,13 +66,13 @@ function formatSalary(baseSalary) {
           </ul>
         </div>
 
-        <!-- Right sidebar -->
         <div class="lg:w-1/4">
           <div class="lg:sticky lg:top-8">
             <div class="bg-slate-50 rounded-3xl p-4 lg:p-6">
               <div>
                 <h3 class="text-lg font-medium text-purple-900">Tustin Recruiting</h3>
-                <p class="text-slate-500 mt-2">At Tustin Recruiting, we connect talented professionals with innovative companies. Explore our job listings to find your next opportunity.</p>
+                <p class="text-slate-500 text-sm mt-2">Orange County's Best Job Board.</p>
+                <p class="text-slate-500 text-sm mt-2">Indeed & ZipRecruiter not working? Give us a try.</p>
               </div>
               <div class="mt-6">
                 <button class="w-full text-white bg-blue-500 hover:bg-blue-600 font-medium py-2 rounded-full">Post a Job</button>

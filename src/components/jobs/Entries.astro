@@ -106,3 +106,88 @@ const {
     </div>
   </div>
 </li>
+
+<!-- No Results Message -->
+<div id="noResults" class="hidden">
+  <div class="text-center py-12 px-4 bg-slate-50 rounded-3xl">
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      class="size-12 mx-auto text-slate-400 mb-4" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    >
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.3-4.3" />
+    </svg>
+    <h3 class="text-lg font-medium text-purple-900 mb-2">No jobs match your search</h3>
+    <p class="text-slate-500 text-sm mb-4">Try adjusting your search or filters to find what you're looking for.</p>
+    <button
+      onclick="window.resetAllFilters()"
+      class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-2 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600"
+    >
+      Reset Search
+    </button>
+  </div>
+</div>
+
+<script>
+  // Function to check if any jobs are visible and show/hide the no results message
+  function checkForResults() {
+    const jobItems = document.querySelectorAll('.job-item');
+    const noResults = document.getElementById('noResults');
+    if (!noResults) return;
+
+    let hasVisibleJobs = false;
+    jobItems.forEach(item => {
+      if (item instanceof HTMLElement && item.style.display !== 'none') {
+        hasVisibleJobs = true;
+      }
+    });
+
+    noResults.style.display = hasVisibleJobs ? 'none' : 'block';
+  }
+
+  // Add the check after any search or filter changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+        checkForResults();
+      }
+    });
+  });
+
+  // Observe all job items for style changes
+  document.querySelectorAll('.job-item').forEach(item => {
+    observer.observe(item, { attributes: true });
+  });
+
+  // Make resetAllFilters available globally
+  window.resetAllFilters = () => {
+    // Reset search input
+    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+    if (searchInput) searchInput.value = '';
+
+    // Reset radio buttons
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      (radio as HTMLInputElement).checked = false;
+    });
+
+    // Show all job items
+    document.querySelectorAll('.job-item').forEach(item => {
+      if (item instanceof HTMLElement) {
+        item.style.display = '';
+      }
+    });
+
+    // Hide no results message
+    const noResults = document.getElementById('noResults');
+    if (noResults) noResults.style.display = 'none';
+  };
+
+  // Initial check
+  checkForResults();
+</script>

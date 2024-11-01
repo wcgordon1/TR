@@ -17,18 +17,19 @@ function formatSalary(baseSalary) {
   <section>
     <header class="px-8 mx-auto max-w-7xl lg:px-16 xl:px-24 pt-8">
       <div
-        class="p-8 lg:px-20 lg:py-32 rounded-3xl bg-gradient-to-tr from-purple-900 via-purple-800 to-blue-700">
+        class="p-8 lg:px-20 lg:py-32 rounded-3xl bg-gradient-to-tr from-purple-900 via-purple-700 to-purple-500">
         <div class="text-center max-w-xl mx-auto">
           <span
             class="text-white text-sm leading-6 px-4 py-2 relative bg-white/10 ring-1 ring-white/20 rounded-full"
-            >Find your next opportunity</span
+            >Find your next job</span
           >
-          <h1
+          <h2
             class="text-white font-semibold tracking-tight lg:text-5xl mt-8 text-3xl lg:text-balance">
-            Tustin Recruiting Jobs
-          </h1>
+            Job Board for Web Developers, UI/UX Designers, and Marketers
+          </h2>
           <p class="text-slate-300 mt-5 lg:text-pretty">
-            Discover roles at innovative companies. Our recruiters connect talented professionals with opportunities that match their skills and aspirations.
+            Jobs is a handpicked job platform showcasing premier opportunities for
+            developers, designers, and marketers within the tech industry.
           </p>
         </div>
       </div>
@@ -44,7 +45,7 @@ function formatSalary(baseSalary) {
         </div>
         
         <!-- Job listings -->
-        <div class="lg:w-2/4 mt-8 lg:mt-0">
+        <div class="lg:w-3/4 mt-8 lg:mt-0">
           <ul role="list" class="job-list divide-y divide-slate-100">
             {
               allPosts.map((post) => (
@@ -64,22 +65,7 @@ function formatSalary(baseSalary) {
             }
           </ul>
         </div>
-
-        <!-- Right sidebar -->
-        <div class="lg:w-1/4">
-          <div class="lg:sticky lg:top-8">
-            <div class="bg-slate-50 rounded-3xl p-4 lg:p-6">
-              <div>
-                <h3 class="text-lg font-medium text-purple-900">Tustin Recruiting</h3>
-                <p class="text-slate-500 mt-2">At Tustin Recruiting, we connect talented professionals with innovative companies. Explore our job listings to find your next opportunity.</p>
-              </div>
-              <div class="mt-6">
-                <button class="w-full text-white bg-blue-500 hover:bg-blue-600 font-medium py-2 rounded-full">Post a Job</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
-</BaseLayout>
+</BaseLayout> 

@@ -4,9 +4,10 @@ interface Props {
   company: string;
   location: string;
   jobId: string;
+  emails: string[];
 }
 
-const { jobTitle, company, location, jobId } = Astro.props;
+const { jobTitle, company, location, jobId, emails } = Astro.props;
 ---
 
 <dialog id="applicationModal" class="bg-transparent relative">
@@ -42,6 +43,7 @@ const { jobTitle, company, location, jobId } = Astro.props;
         <input type="hidden" name="company" value={company} />
         <input type="hidden" name="location" value={location} />
         <input type="hidden" name="jobId" value={jobId} />
+        <input type="hidden" name="emails" value={JSON.stringify(emails)} />
         
         <div>
           <label for="name" class="sr-only">Name</label>

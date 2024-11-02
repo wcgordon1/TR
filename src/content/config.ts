@@ -82,6 +82,8 @@ const jobsCollection = defineCollection({
       name: z.string(),
       value: z.string(),
     }),
+    featured: z.boolean().default(false),
+    email: z.array(z.string()),
   }),
 });
 const postsCollection = defineCollection({

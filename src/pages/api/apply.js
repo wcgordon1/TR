@@ -19,13 +19,14 @@ export async function POST({ request }) {
     const coverLetter = formData.get('coverLetter');
     const jobTitle = formData.get('jobTitle');
     const resume = formData.get('resume');
+    const emails = JSON.parse(formData.get('emails'));
 
     const resumeArrayBuffer = await resume.arrayBuffer();
     const resumeContent = Buffer.from(resumeArrayBuffer).toString('base64');
 
     const data = await resend.emails.send({
       from: 'hey@tustinjobalert.com',
-      to: ['will@tustinrecruiting.com', 'john@tustinrecruiting.com'],
+      to: emails,
       subject: `New Job Application: ${jobTitle} from ${name}`,
       text: `
 Job Application Details:

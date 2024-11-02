@@ -213,11 +213,12 @@ const jobSchema = {
               and aren't afraid to challenge assumptions. Join us.
             </p>
             <div class="mt-10 flex">
-              <a
+              <button
                 class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
-                href="/job-application">
+                id="openModalBottom"
+              >
                 Apply Now - {frontmatter.position}
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -234,11 +235,18 @@ const jobSchema = {
 </BaseLayout>
 
 <script>
-  // Add modal trigger
+  // Add modal triggers
   const openButton = document.getElementById('openModal');
+  const openBottomButton = document.getElementById('openModalBottom');
   const modal = document.getElementById('applicationModal') as HTMLDialogElement;
 
+  // Handle top button click
   openButton?.addEventListener('click', () => {
+    modal.showModal();
+  });
+
+  // Handle bottom button click
+  openBottomButton?.addEventListener('click', () => {
     modal.showModal();
   });
 

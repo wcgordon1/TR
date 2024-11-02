@@ -3,6 +3,12 @@ import BaseLayout from "./BaseLayout.astro";
 import ApplicationModal from "../components/jobs/ApplicationModal.astro";
 const { frontmatter } = Astro.props;
 
+// Create dynamic SEO title and description
+const seoTitle = `${frontmatter.position} in ${frontmatter.location}`;
+const seoDescription = frontmatter.description.length > 160 
+  ? `${frontmatter.description.substring(0, 157)}...`
+  : frontmatter.description;
+
 // Create JSON-LD schema
 const jobSchema = {
   "@context": "https://schema.org/",
@@ -43,7 +49,7 @@ const jobSchema = {
 };
 ---
 
-<BaseLayout>
+<BaseLayout title={seoTitle} description={seoDescription}>
   <script type="application/ld+json" set:html={JSON.stringify(jobSchema)} />
   
   <section>

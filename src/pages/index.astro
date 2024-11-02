@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import HeaderOne from "@/components/headers/HeaderOne.astro";
-import LogoCloudOne from "@/components/testimonials/LogoCloudOne.astro";
 import FeatureOne from "@/components/features/FeatureOne.astro";
 import FeatureThree from "@/components/features/FeatureThree.astro";
 import FeatureFour from "@/components/features/FeatureFour.astro";
@@ -9,12 +8,16 @@ import TestimonialTwo from "@/components/testimonials/TestimonialTwo.astro";
 import PricingOne from "@/components/pricing/PricingOne.astro";
 import FaqOne from "@/components/faqs/FaqOne.astro";
 import CtaOne from "@/components/cta/CtaOne.astro";
+
+// Define custom meta title and description for the homepage
+const pageTitle = "Tustin Recruiting | Top Tech & Engineering Jobs in Orange County";
+const pageDescription = "Find your next career opportunity with Tustin Recruiting. We connect top talent with leading companies in Orange County, specializing in tech, engineering, and executive roles.";
 ---
-<BaseLayout>
+
+<BaseLayout title={pageTitle} description={pageDescription}>
   <HeaderOne />
-  <LogoCloudOne />
-  <FeatureOne />
   <FeatureThree />
+  <FeatureOne />
   <FeatureFour />
   <TestimonialTwo />
   <PricingOne />

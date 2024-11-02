@@ -1,45 +1,103 @@
-# Astro & Tailwind CSS Starter Kit
+Basehead.astro
 
-## Template Integrations
-- @astrojs/tailwind - https://docs.astro.build/en/guides/integrations-guide/tailwind/
-- @astrojs/sitemap - https://docs.astro.build/en/guides/integrations-guide/sitemap/
-- @astrojs/mdx - https://docs.astro.build/en/guides/markdown-content/
-- @astrojs/rss - https://docs.astro.build/en/guides/rss/
-- @astrojs/prism - https://docs.astro.build/en/reference/api-reference/#prism
-## Template Structure
+---
+import "../styles/global.css";
+import Metas from "./seo/Metas.astro";
+import Favicons from "./seo/Favicons.astro";
+const {
+  title = "Tustin Recruiting",
+  description = "Tustin Recruiting is a boutique recruiting firm specializing in the placement of top talent in Orange County, California.",
+  url,
+  socialImage = "/social-preview-image.png",
+  twitterImage = "/twitter-preview-image.png", // Assuming you have a separate image for Twitter
+  author = "Tustin Recruiting",
+} = Astro.props;
+const sanitizedTitle = title.toLowerCase().replaceAll(" ", "-");
+---
+<Metas
+  title={title}
+  description={description.substring(0, 100)}
+  url={Astro.site
+    ? `${Astro.site}/${sanitizedTitle}`
+    : `https://TustinRecruiting.com/${sanitizedTitle}`}
+  image={socialImage}
+  author={author}
+  twitterImage={twitterImage}
+/>
+<Favicons />
+<link
+  href="https://api.fontshare.com/v2/css?f[]=jet-brains-mono@1,2&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="preconnect"
+  href="https://rsms.me/"
+/>
+<link
+  rel="stylesheet"
+  href="https://rsms.me/inter/inter.css"
+/>
+<!---- Alpine integrations -->
+<script
+  defer
+  src="https://unpkg.com/@alpinejs/focus@3.10.3/dist/cdn.min.js"
+></script>
+<script
+  defer
+  src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"
+></script>
+<!---- mailgo -->
+<script src="https://unpkg.com/mailgo@0.12.2/dist/mailgo.min.js"></script>
 
 
 
-Inside of your Astro project, you'll see the following folders and files:
+Metas.astro
 
-```
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+---
+const { title, description, url, socialImage, twitterImage, author } =
+  Astro.props;
+let subtitle = "Tustin Recruiting";
+---
+<!--
+    Standard meta
+ -->
+<meta charset="UTF-8" />
+<meta name="author" content="Yout name" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="viewport" content="width=device-width" />
+<meta name="msapplication-TileColor" content="#ffffff" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="your keywords" content="Add ypour keywords here" />
+<!--
+    General meta for Open Graphs
+ -->
+<meta name="title" content={`${title} - ${subtitle}`} />
+<meta name="description" content={description} />
+<meta name="author" content={author} />
+<!---------------------
+    open graph standard
+--------------------->
+<meta property="og:title" content={`${title} - ${subtitle}`} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={url} />
+<!---------------------
+     open graph Meta
+--------------------->
+<meta
+  property="og:image"
+  content={Astro.site ? `${Astro.site}${socialImage}` : socialImage}
+/>
+<!---------------------
+    Open Graph Twitter
+ --------------------->
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:3000`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro --help` | Get help using the Astro CLI                     |
-
-## Want to learn more?
-
-Feel free to check Astroäs [documentation](https://docs.astro.build)
+<meta property="og:site_name" content={title} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content={description} />
+<meta
+  name="twitter:image"
+  content={Astro.site ? `${Astro.site}${twitterImage}` : twitterImage}
+/>
+<title>{title} - {subtitle}</title>

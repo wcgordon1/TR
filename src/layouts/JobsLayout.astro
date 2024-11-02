@@ -54,9 +54,9 @@ const jobSchema = {
           <div class="lg:pl-36 md:pl-12">
             <nav
               aria-label="Sidebar"
-              class="bg-slate-50 rounded-lg divide-y space-y-3 p-4 lg:p-8">
+              class="bg-slate-50 rounded-3xl divide-y space-y-3 p-4 lg:p-8">
               <div>
-                <h3 class="text-xl font-medium text-purple-900 pt-2">
+                <h3 class="text-2xl font-medium text-purple-900 pt-2">
                   {frontmatter.position}
                 </h3>
               </div>
@@ -120,16 +120,53 @@ const jobSchema = {
 
               <div>
                 <h3 class="text-lg font-medium text-purple-900 pt-2">
-                  Category
+                  Industry
                 </h3>
                 <p class="text-slate-500 mt-1">{frontmatter.occupationalCategory}</p>
               </div>
 
               <div>
                 <h3 class="text-lg font-medium text-purple-900 pt-2">
-                  Team
+                  Role
                 </h3>
                 <p class="text-slate-500 mt-1">{frontmatter.team}</p>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium text-purple-900 pt-2">
+                  Share
+                </h3>
+                <div class="flex items-center gap-4 mt-2">
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out this ${frontmatter.position} role at ${frontmatter.hiringOrganization.name}`)}&url=${encodeURIComponent(Astro.url)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-slate-500 hover:text-slate-700 transition-colors"
+                    aria-label="Share on Twitter"
+                  >
+                    <svg class="size-6" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                  </a>
+                  <a
+                    href={`mailto:?subject=${encodeURIComponent(`Job Opportunity: ${frontmatter.position} at ${frontmatter.hiringOrganization.name}`)}&body=${encodeURIComponent(`Check out this job opportunity:\n\n${frontmatter.position} at ${frontmatter.hiringOrganization.name}\n\n${Astro.url}`)}`}
+                    class="text-slate-500 hover:text-slate-700 transition-colors"
+                    aria-label="Share via Email"
+                  >
+                    <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                  </a>
+                  <button
+                    id="copyLink"
+                    class="text-slate-500 hover:text-slate-700 transition-colors"
+                    aria-label="Copy link"
+                  >
+                    <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               <div class="pt-4 flex">
@@ -179,7 +216,7 @@ const jobSchema = {
               <a
                 class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
                 href="/job-application">
-                Apply now
+                Apply Now - {frontmatter.position}
               </a>
             </div>
           </div>
@@ -203,5 +240,27 @@ const jobSchema = {
 
   openButton?.addEventListener('click', () => {
     modal.showModal();
+  });
+
+  // Copy link functionality
+  const copyButton = document.getElementById('copyLink');
+  copyButton?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      
+      // Optional: Show feedback
+      const originalIcon = copyButton.innerHTML;
+      copyButton.innerHTML = `
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 13l4 4L19 7"/>
+        </svg>
+      `;
+      
+      setTimeout(() => {
+        copyButton.innerHTML = originalIcon;
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   });
 </script>

@@ -1,7 +1,7 @@
 ---
 position: "Account Executive"
 description: "Spazio Bianco is seeking a talented Accounts Receivable Manager to join our innovative team. In this role, you will be responsible for managing and optimizing our monetization operations, ensuring seamless financial processes, and leading initiatives to improve revenue collection efficiency."
-location: "Madrid, Spain"
+location: "Newport Beach, CA"
 team: "Sales"
 datePosted: "2024-03-20"
 validThrough: "2024-06-20T00:00"
@@ -12,12 +12,14 @@ hiringOrganization:
   logo: "/images/LOGO1.png"
 jobLocation:
   streetAddress: "Calle de Alcalá 123"
-  addressLocality: "Madrid"
-  addressRegion: "Madrid"
-  postalCode: "28009"
-  addressCountry: "ES"
+  # City
+  addressLocality: "Newport Beach"
+  # State
+  addressRegion: "CA"
+  postalCode: "92660"
+  addressCountry: "USA"
 baseSalary:
-  currency: "EUR"
+  currency: "USD"
   value: 65000
   minValue: 55000
   maxValue: 75000
@@ -25,7 +27,7 @@ baseSalary:
 experienceRequirements: "5+ years"
 occupationalCategory: "Finance"
 identifier:
-  name: "Spazio Bianco"
+  name: "Tustin Recruiting"
   value: "AR-MGR-2024"
 featured: false
 email: ['wcgordon1@gmail.com', 'will.nft.works@gmail.com', 'john@tustinrecruiting.com']

@@ -56,17 +56,82 @@ const jobSchema = {
               aria-label="Sidebar"
               class="bg-slate-50 rounded-lg divide-y space-y-3 p-4 lg:p-8">
               <div>
-                <h3 class="text-lg text-purple-900">Office location</h3>
-                <div class="flex items-center gap-2 mt-4">
-                  <p class="text-slate-500">
-                    {frontmatter.location}
-                  </p>
-                </div>
+                <h3 class="text-xl font-medium text-purple-900 pt-2">
+                  {frontmatter.position}
+                </h3>
               </div>
               <div>
-                <h3 class="mt-3 text-lg text-purple-900">Team</h3>
-                <p class="text-slate-500 mt-4">{frontmatter.team}</p>
+                <h3 class="text-lg font-medium text-purple-900 pt-2">
+                  {frontmatter.hiringOrganization.name}
+                </h3>
+                <a 
+                  href={frontmatter.hiringOrganization.sameAs}
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  class="text-blue-500 hover:text-blue-600 text-sm mt-1 inline-flex items-center gap-1"
+                >
+                  Visit company website
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                    <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+                    <path d="M11 13l9 -9" />
+                    <path d="M15 4h5v5" />
+                  </svg>
+                </a>
               </div>
+
+            
+
+              <div>
+                <h3 class="text-lg font-medium text-purple-900 pt-2">
+                  Posted
+                </h3>
+                <p class="text-slate-500 mt-1">
+                  {new Date(frontmatter.datePosted).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </p>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium text-purple-900 pt-2">
+                  Location
+                </h3>
+                <p class="text-slate-500 mt-1">{frontmatter.location}</p>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium text-purple-900 pt-2">
+                  Salary Range
+                </h3>
+                <p class="text-slate-500 mt-1">
+                  {new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: frontmatter.baseSalary.currency,
+                    maximumFractionDigits: 0
+                  }).format(frontmatter.baseSalary.minValue)} - {new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: frontmatter.baseSalary.currency,
+                    maximumFractionDigits: 0
+                  }).format(frontmatter.baseSalary.maxValue)} / {frontmatter.baseSalary.unitText.toLowerCase()}
+                </p>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium text-purple-900 pt-2">
+                  Category
+                </h3>
+                <p class="text-slate-500 mt-1">{frontmatter.occupationalCategory}</p>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-medium text-purple-900 pt-2">
+                  Team
+                </h3>
+                <p class="text-slate-500 mt-1">{frontmatter.team}</p>
+              </div>
+
               <div class="pt-4 flex">
                 <button
                   id="openModal"
@@ -102,11 +167,11 @@ const jobSchema = {
               We look forward to hearing from you
             </h2>
             <p class="text-slate-300 mt-5 lg:text-balance">
-              At Spazio Bianco, we're looking for people with passion, grit, and
+              At Tustin Recruiting, we're looking for people with passion, grit, and
               integrity. You're encouraged to apply even if your experience
               doesn't precisely match the job description. Your skills and
               passion will stand out—and set you apart—especially if your career
-              has taken some extraordinary twists and turns. At Spazio Bianco,
+              has taken some extraordinary twists and turns. At Tustin Recruiting,
               we welcome diverse perspectives and people who think rigorously
               and aren't afraid to challenge assumptions. Join us.
             </p>
